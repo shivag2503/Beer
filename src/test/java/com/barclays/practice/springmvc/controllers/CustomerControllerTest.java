@@ -1,6 +1,6 @@
 package com.barclays.practice.springmvc.controllers;
 
-import com.barclays.practice.springmvc.domain.Customer;
+import com.barclays.practice.springmvc.domain.CustomerDTO;
 import com.barclays.practice.springmvc.services.CustomerService;
 import com.barclays.practice.springmvc.services.CustomerServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,7 +41,7 @@ class CustomerControllerTest {
     ArgumentCaptor<UUID> argumentCaptor;
 
     @Captor
-    ArgumentCaptor<Customer> customerArgumentCaptor;
+    ArgumentCaptor<CustomerDTO> customerArgumentCaptor;
 
     @MockBean
     CustomerService customerService;
@@ -55,7 +55,7 @@ class CustomerControllerTest {
 
     @Test
     void testPatchCustomer() throws Exception {
-        Customer customer = service.getCustomers().get(0);
+        CustomerDTO customer = service.getCustomers().get(0);
 
         Map<String, Object> customerMap = new HashMap<>();
         customerMap.put("customerName", "New Name");
@@ -75,7 +75,7 @@ class CustomerControllerTest {
 
     @Test
     void testDeleteCustomer() throws Exception {
-        Customer customer = service.getCustomers().get(0);
+        CustomerDTO customer = service.getCustomers().get(0);
 
         mockMvc.perform(delete(CustomerController.CUSTOMER_PATH_ID, customer.getId())
                         .accept(MediaType.APPLICATION_JSON))
@@ -90,7 +90,7 @@ class CustomerControllerTest {
 
     @Test
     void testUpdateCustomer() throws Exception {
-        Customer customer = service.getCustomers().get(0);
+        CustomerDTO customer = service.getCustomers().get(0);
 
         mockMvc.perform(put(CustomerController.CUSTOMER_PATH_ID, customer.getId())
                         .accept(MediaType.APPLICATION_JSON)
@@ -98,16 +98,16 @@ class CustomerControllerTest {
                         .content(objectMapper.writeValueAsString(customer)))
                 .andExpect(status().isNoContent());
 
-        verify(customerService).updateCustomer(any(UUID.class), any(Customer.class));
+        verify(customerService).updateCustomer(any(UUID.class), any(CustomerDTO.class));
     }
 
     @Test
     void testCreateCustomer() throws Exception {
-        Customer customer = service.getCustomers().get(0);
+        CustomerDTO customer = service.getCustomers().get(0);
         customer.setVersion(null);
         customer.setId(null);
 
-        given(customerService.createCustomer(any(Customer.class))).willReturn(service.
+        given(customerService.createCustomer(any(CustomerDTO.class))).willReturn(service.
                 getCustomers().get(1));
 
         mockMvc.perform(post(CustomerController.CUSTOMER_URL)
@@ -141,7 +141,7 @@ class CustomerControllerTest {
 
     @Test
     void testCustomerById() throws Exception {
-        Customer testCustomer = service.getCustomers().get(0);
+        CustomerDTO testCustomer = service.getCustomers().get(0);
 
         given(customerService.getCustomerById(testCustomer.getId()))
                 .willReturn(Optional.of(testCustomer));

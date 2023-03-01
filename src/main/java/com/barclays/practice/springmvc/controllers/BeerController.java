@@ -1,6 +1,6 @@
 package com.barclays.practice.springmvc.controllers;
 
-import com.barclays.practice.springmvc.domain.Beer;
+import com.barclays.practice.springmvc.domain.BeerDTO;
 import com.barclays.practice.springmvc.services.BeerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,21 +22,21 @@ public class BeerController {
     private final BeerService beerService;
 
     @PostMapping(BEER_URL)
-    public ResponseEntity handlePost(@RequestBody Beer beer) {
-        Beer newBeer = beerService.createBeer(beer);
+    public ResponseEntity handlePost(@RequestBody BeerDTO beer) {
+        BeerDTO newBeer = beerService.createBeer(beer);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/beer" + newBeer.getId().toString());
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }
 
     @PutMapping(BEER_PATH_ID)
-    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID id, @RequestBody Beer beer) {
+    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID id, @RequestBody BeerDTO beer) {
         beerService.updateBeer(id, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PatchMapping(BEER_PATH_ID)
-    public ResponseEntity patchBeerById(@PathVariable("beerId") UUID id, @RequestBody Beer beer) {
+    public ResponseEntity patchBeerById(@PathVariable("beerId") UUID id, @RequestBody BeerDTO beer) {
         beerService.patchBeerById(id, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -48,12 +48,12 @@ public class BeerController {
     }
 
     @GetMapping(BEER_URL)
-    public List<Beer> listBeers() {
+    public List<BeerDTO> listBeers() {
         return beerService.getBeers();
     }
 
     @GetMapping(BEER_PATH_ID)
-    public Beer getBeerById(@PathVariable("beerId") UUID id) {
+    public BeerDTO getBeerById(@PathVariable("beerId") UUID id) {
 
         log.debug("Get beer id - in controller class -111111111");
         return beerService.getBearById(id).orElseThrow(NotFoundException::new);

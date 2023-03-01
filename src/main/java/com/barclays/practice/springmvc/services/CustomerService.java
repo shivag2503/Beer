@@ -1,6 +1,6 @@
 package com.barclays.practice.springmvc.services;
 
-import com.barclays.practice.springmvc.domain.Customer;
+import com.barclays.practice.springmvc.domain.CustomerDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,15 +8,15 @@ import java.util.UUID;
 
 public interface CustomerService {
 
-    List<Customer> getCustomers();
+    List<CustomerDTO> getCustomers();
 
-    Optional<Customer> getCustomerById(UUID id);
+    Optional<CustomerDTO> getCustomerById(UUID id);
 
-    Customer createCustomer(Customer customer);
+    CustomerDTO createCustomer(CustomerDTO customer);
 
-    void updateCustomer(UUID id, Customer customer);
+    void updateCustomer(UUID id, CustomerDTO customer);
 
     void deleteById(UUID id);
 
-    void patchCustomerById(UUID id, Customer customer);
+    void patchCustomerById(UUID id, CustomerDTO customer);
 }

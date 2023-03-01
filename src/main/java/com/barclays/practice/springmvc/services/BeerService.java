@@ -1,6 +1,6 @@
 package com.barclays.practice.springmvc.services;
 
-import com.barclays.practice.springmvc.domain.Beer;
+import com.barclays.practice.springmvc.domain.BeerDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,15 +8,15 @@ import java.util.UUID;
 
 public interface BeerService {
 
-    List<Beer> getBeers();
+    List<BeerDTO> getBeers();
 
-    Optional<Beer> getBearById(UUID id);
+    Optional<BeerDTO> getBearById(UUID id);
 
-    Beer createBeer(Beer beer);
+    BeerDTO createBeer(BeerDTO beer);
 
-    void updateBeer(UUID id, Beer beer);
+    void updateBeer(UUID id, BeerDTO beer);
 
     void deleteById(UUID id);
 
-    void patchBeerById(UUID id, Beer beer);
+    void patchBeerById(UUID id, BeerDTO beer);
 }
