@@ -16,12 +16,13 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
+    public static final String CUSTOMER_URL = "/api/v1/customer";
+    public static final String CUSTOMER_PATH_ID = CUSTOMER_URL + "/{customerId}";
     private final CustomerService customerService;
 
-    @PostMapping
+    @PostMapping(CUSTOMER_URL)
     public ResponseEntity newCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.createCustomer(customer);
         HttpHeaders headers = new HttpHeaders();
@@ -29,30 +30,30 @@ public class CustomerController {
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }
 
-    @PutMapping("/{customerId}")
+    @PutMapping(CUSTOMER_PATH_ID)
     public ResponseEntity updateCustomerById(@PathVariable("customerId") UUID id, @RequestBody Customer customer) {
         customerService.updateCustomer(id, customer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/{customerId}")
+    @PatchMapping(CUSTOMER_PATH_ID)
     public ResponseEntity patchCustomerById(@PathVariable("customerId") UUID id, @RequestBody Customer customer) {
         customerService.patchCustomerById(id, customer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/{customerId}")
+    @DeleteMapping(CUSTOMER_PATH_ID)
     public ResponseEntity deleteCustomer(@PathVariable("customerId") UUID id) {
         customerService.deleteById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping(CUSTOMER_URL)
     public List<Customer> getAllCustomers() {
         return customerService.getCustomers();
     }
 
-    @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
+    @GetMapping(CUSTOMER_PATH_ID)
     public Customer getCustomerById(@PathVariable("customerId") UUID id) {
         return customerService.getCustomerById(id);
     }
