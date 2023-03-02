@@ -39,6 +39,8 @@ class CustomerControllerIT {
         });
     }
 
+    @Transactional
+    @Rollback
     @Test
     void TestDeleteCustomer() {
         Customer customer = customerRepository.findAll().get(0);
