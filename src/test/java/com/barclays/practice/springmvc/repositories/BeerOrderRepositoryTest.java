@@ -2,6 +2,7 @@ package com.barclays.practice.springmvc.repositories;
 
 import com.barclays.practice.springmvc.entities.Beer;
 import com.barclays.practice.springmvc.entities.BeerOrder;
+import com.barclays.practice.springmvc.entities.BeerOrderShipment;
 import com.barclays.practice.springmvc.entities.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,9 @@ class BeerOrderRepositoryTest {
         BeerOrder beerOrder = BeerOrder.builder()
                 .customerRef("Test order")
                 .customer(testCustomer)
+                .beerOrderShipment(BeerOrderShipment.builder()
+                        .trackingNumber("12456n")
+                        .build())
                 .build();
 
         BeerOrder saveBeerOrder = beerOrderRepository.save(beerOrder);

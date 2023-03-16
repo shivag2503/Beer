@@ -5,6 +5,7 @@ import com.barclays.practice.springmvc.domain.BeerStyle;
 import com.barclays.practice.springmvc.entities.Beer;
 import com.barclays.practice.springmvc.mappers.BeerMapper;
 import com.barclays.practice.springmvc.repositories.BeerRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,6 +57,35 @@ class BeerControllerIT {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+    }
+
+    @Test
+    void testUpdateBeerBadVersion() throws Exception {
+        Beer beer = beerRepository.findAll().get(0);
+
+        BeerDTO beerDTO = beerMapper.beer(beer);
+
+        beerDTO.setBeerName("updated name");
+
+        MvcResult mvcResult = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(beerDTO)))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        System.out.println(mvcResult.getResponse().getContentAsString());
+
+        beerDTO.setBeerName("updated name 2");
+
+        MvcResult mvcResult2 = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(beerDTO)))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        System.out.println(mvcResult2.getResponse().getStatus());
     }
 
     @Test
