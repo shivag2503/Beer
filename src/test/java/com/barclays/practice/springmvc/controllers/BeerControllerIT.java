@@ -73,10 +73,10 @@ class BeerControllerIT {
 
         MvcResult mvcResult = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD))
+                        .with(BeerControllerTest.jwrRequestProcessor)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(beerDTO))
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isNoContent())
                 .andReturn();
 
@@ -86,7 +86,7 @@ class BeerControllerIT {
 
         MvcResult mvcResult2 = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD))
+                        .with(BeerControllerTest.jwrRequestProcessor)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beerDTO)))
                 .andExpect(status().isNoContent())
@@ -103,7 +103,7 @@ class BeerControllerIT {
                         .queryParam("showInventory", "TRUE")
                         .queryParam("pageNumber", "2")
                         .queryParam("pageSize", "50")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(50)))
                 .andExpect(jsonPath("$.content[0].quantityOnHand").value(IsNull.notNullValue()));
@@ -116,7 +116,7 @@ class BeerControllerIT {
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("showInventory", "FALSE")
                         .queryParam("pageSize", "800")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(309)))
                 .andExpect(jsonPath("$.content[0].quantityOnHand").value(IsNull.nullValue()));
@@ -129,7 +129,7 @@ class BeerControllerIT {
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("showInventory", "TRUE")
                         .queryParam("pageSize", "800")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(309)))
                 .andExpect(jsonPath("$.content[0].quantityOnHand").value(IsNull.notNullValue()));
@@ -141,7 +141,7 @@ class BeerControllerIT {
                         .queryParam("beerName", "IPA")
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("pageSize", "800")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(309)));
     }
@@ -161,9 +161,9 @@ class BeerControllerIT {
         mockMvc.perform(get(BeerController.BEER_URL)
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("pageSize", "800")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.size()", is(547)));
+                .andExpect(jsonPath("$.content.size()", is(546)));
     }
 
     @Test
@@ -171,7 +171,7 @@ class BeerControllerIT {
         mockMvc.perform(get(BeerController.BEER_URL)
                         .queryParam("beerName", "IPA")
                         .queryParam("pageSize", "800")
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(335)));
     }
@@ -189,7 +189,7 @@ class BeerControllerIT {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beerMap))
-                        .with(httpBasic(BeerControllerTest.USERNAME, BeerControllerTest.PASSWORD)))
+                        .with(BeerControllerTest.jwrRequestProcessor))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.length()", is(1))).andReturn();
 
