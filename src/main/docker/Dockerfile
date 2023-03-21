@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17.0.4.1_1-jre as builder
 WORKDIR application
-ADD target/spring-mvc-0.0.1-SNAPSHOT.jar ./
-RUN java -Djarmode=layertools -jar spring-mvc-0.0.1-SNAPSHOT.jar extract
+ADD maven/${project.build.finalName}.jar ./
+RUN java -Djarmode=layertools -jar ${project.build.finalName}.jar extract
 
 FROM eclipse-temurin:17.0.4.1_1-jre
 WORKDIR application
