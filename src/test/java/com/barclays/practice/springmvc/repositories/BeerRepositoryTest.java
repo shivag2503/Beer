@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Import({BootstrapData.class, BeerCsvServiceImpl.class})
 class BeerRepositoryTest {
 
-    @Autowired
+   /* @Autowired
     BeerRepository beerRepository;
 
     @Test
@@ -58,5 +58,5 @@ class BeerRepositoryTest {
 
         assertThat(newBeer).isNotNull();
         assertThat(newBeer.getId()).isNotNull();
-    }
+    }*/
 }

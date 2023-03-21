@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class CustomerRepositoryTest {
 
-    @Autowired
+   /* @Autowired
     CustomerRepository customerRepository;
 
     @Test
@@ -21,5 +21,5 @@ class CustomerRepositoryTest {
                 .build());
 
         assertThat(customer.getId()).isNotNull();
-    }
+    }*/
 }

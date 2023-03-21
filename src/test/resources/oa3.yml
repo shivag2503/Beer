@@ -1,0 +1,2378 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8081
+  description: Generated server url
+paths:
+  /beerOrders:
+    get:
+      tags:
+      - beer-order-entity-controller
+      description: get-beerorder
+      operationId: getCollectionResource-beerorder-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeerOrder'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeerOrder'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - beer-order-entity-controller
+      description: create-beerorder
+      operationId: postCollectionResource-beerorder-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerOrderRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+  /beerOrders/{id}:
+    get:
+      tags:
+      - beer-order-entity-controller
+      description: get-beerorder
+      operationId: getItemResource-beerorder-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - beer-order-entity-controller
+      description: update-beerorder
+      operationId: putItemResource-beerorder-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerOrderRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - beer-order-entity-controller
+      description: delete-beerorder
+      operationId: deleteItemResource-beerorder-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - beer-order-entity-controller
+      description: patch-beerorder
+      operationId: patchItemResource-beerorder-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerOrderRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+        "204":
+          description: No Content
+  /beerOrders/{id}/customer:
+    get:
+      tags:
+      - beer-order-property-reference-controller
+      description: get-customer-by-beerorder-Id
+      operationId: followPropertyReference-beerorder-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - beer-order-property-reference-controller
+      description: update-customer-by-beerorder-Id
+      operationId: createPropertyReference-beerorder-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - beer-order-property-reference-controller
+      description: delete-customer-by-beerorder-Id
+      operationId: deletePropertyReference-beerorder-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - beer-order-property-reference-controller
+      description: patch-customer-by-beerorder-Id
+      operationId: createPropertyReference-beerorder-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "204":
+          description: No Content
+  /beerOrders/{id}/customer/{propertyId}:
+    get:
+      tags:
+      - beer-order-property-reference-controller
+      description: get-customer-by-beerorder-Id
+      operationId: followPropertyReference-beerorder-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - beer-order-property-reference-controller
+      description: delete-customer-by-beerorder-Id
+      operationId: deletePropertyReferenceId-beerorder-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /beers:
+    get:
+      tags:
+      - beer-entity-controller
+      description: get-beer
+      operationId: getCollectionResource-beer-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeer'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeer'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - beer-entity-controller
+      description: create-beer
+      operationId: postCollectionResource-beer-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeer'
+  /beers/search/findAllByBeerNameIsLikeIgnoreCase:
+    get:
+      tags:
+      - beer-search-controller
+      operationId: executeSearch-beer-get
+      parameters:
+      - name: beerName
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeer'
+        "404":
+          description: Not Found
+  /beers/search/findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle:
+    get:
+      tags:
+      - beer-search-controller
+      operationId: executeSearch-beer-get_1
+      parameters:
+      - name: beerName
+        in: query
+        schema:
+          type: string
+      - name: beerStyle
+        in: query
+        schema:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeer'
+        "404":
+          description: Not Found
+  /beers/search/findAllByBeerStyle:
+    get:
+      tags:
+      - beer-search-controller
+      operationId: executeSearch-beer-get_2
+      parameters:
+      - name: beerStyle
+        in: query
+        schema:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBeer'
+        "404":
+          description: Not Found
+  /beers/{id}:
+    get:
+      tags:
+      - beer-entity-controller
+      description: get-beer
+      operationId: getItemResource-beer-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeer'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - beer-entity-controller
+      description: update-beer
+      operationId: putItemResource-beer-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeer'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeer'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - beer-entity-controller
+      description: delete-beer
+      operationId: deleteItemResource-beer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - beer-entity-controller
+      description: patch-beer
+      operationId: patchItemResource-beer-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBeer'
+        "204":
+          description: No Content
+  /beers/{id}/categories:
+    get:
+      tags:
+      - beer-property-reference-controller
+      description: get-category-by-beer-Id
+      operationId: followPropertyReference-beer-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCategory'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - beer-property-reference-controller
+      description: update-category-by-beer-Id
+      operationId: createPropertyReference-beer-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCategory'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCategory'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - beer-property-reference-controller
+      description: delete-category-by-beer-Id
+      operationId: deletePropertyReference-beer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - beer-property-reference-controller
+      description: patch-category-by-beer-Id
+      operationId: createPropertyReference-beer-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCategory'
+        "204":
+          description: No Content
+  /beers/{id}/categories/{propertyId}:
+    get:
+      tags:
+      - beer-property-reference-controller
+      description: get-category-by-beer-Id
+      operationId: followPropertyReference-beer-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCategory'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - beer-property-reference-controller
+      description: delete-category-by-beer-Id
+      operationId: deletePropertyReferenceId-beer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /categories:
+    get:
+      tags:
+      - category-entity-controller
+      description: get-category
+      operationId: getCollectionResource-category-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCategory'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCategory'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - category-entity-controller
+      description: create-category
+      operationId: postCollectionResource-category-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCategory'
+  /categories/{id}:
+    get:
+      tags:
+      - category-entity-controller
+      description: get-category
+      operationId: getItemResource-category-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCategory'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - category-entity-controller
+      description: update-category
+      operationId: putItemResource-category-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCategory'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCategory'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - category-entity-controller
+      description: delete-category
+      operationId: deleteItemResource-category-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - category-entity-controller
+      description: patch-category
+      operationId: patchItemResource-category-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCategory'
+        "204":
+          description: No Content
+  /categories/{id}/beers:
+    get:
+      tags:
+      - category-property-reference-controller
+      description: get-beer-by-category-Id
+      operationId: followPropertyReference-category-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeer'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - category-property-reference-controller
+      description: update-beer-by-category-Id
+      operationId: createPropertyReference-category-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeer'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeer'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - category-property-reference-controller
+      description: delete-beer-by-category-Id
+      operationId: deletePropertyReference-category-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - category-property-reference-controller
+      description: patch-beer-by-category-Id
+      operationId: createPropertyReference-category-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeer'
+        "204":
+          description: No Content
+  /categories/{id}/beers/{propertyId}:
+    get:
+      tags:
+      - category-property-reference-controller
+      description: get-beer-by-category-Id
+      operationId: followPropertyReference-category-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeer'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - category-property-reference-controller
+      description: delete-beer-by-category-Id
+      operationId: deletePropertyReferenceId-category-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /customers:
+    get:
+      tags:
+      - customer-entity-controller
+      description: get-customer
+      operationId: getCollectionResource-customer-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCustomer'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCustomer'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - customer-entity-controller
+      description: create-customer
+      operationId: postCollectionResource-customer-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+  /customers/{id}:
+    get:
+      tags:
+      - customer-entity-controller
+      description: get-customer
+      operationId: getItemResource-customer-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - customer-entity-controller
+      description: update-customer
+      operationId: putItemResource-customer-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - customer-entity-controller
+      description: delete-customer
+      operationId: deleteItemResource-customer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - customer-entity-controller
+      description: patch-customer
+      operationId: patchItemResource-customer-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        "204":
+          description: No Content
+  /customers/{id}/beerOrders:
+    get:
+      tags:
+      - customer-property-reference-controller
+      description: get-beerorder-by-customer-Id
+      operationId: followPropertyReference-customer-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeerOrder'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - customer-property-reference-controller
+      description: update-beerorder-by-customer-Id
+      operationId: createPropertyReference-customer-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeerOrder'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeerOrder'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - customer-property-reference-controller
+      description: delete-beerorder-by-customer-Id
+      operationId: deletePropertyReference-customer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - customer-property-reference-controller
+      description: patch-beerorder-by-customer-Id
+      operationId: createPropertyReference-customer-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeerOrder'
+        "204":
+          description: No Content
+  /customers/{id}/beerOrders/{propertyId}:
+    get:
+      tags:
+      - customer-property-reference-controller
+      description: get-beerorder-by-customer-Id
+      operationId: followPropertyReference-customer-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBeerOrder'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - customer-property-reference-controller
+      description: delete-beerorder-by-customer-Id
+      operationId: deletePropertyReferenceId-customer-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /profile:
+    get:
+      tags:
+      - profile-controller
+      operationId: listAllFormsOfMetadata_1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RepresentationModelObject'
+  /profile/beerOrders:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/beers:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_2
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/categories:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_3
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/customers:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_4
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /api/v1/customer/{customerId}:
+    get:
+      tags:
+      - customer-controller
+      operationId: getCustomerById
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CustomerDTO'
+    put:
+      tags:
+      - customer-controller
+      operationId: updateCustomerById
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+    delete:
+      tags:
+      - customer-controller
+      operationId: deleteCustomer
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+    patch:
+      tags:
+      - customer-controller
+      operationId: patchCustomerById
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /api/v1/beer/{beerId}:
+    get:
+      tags:
+      - beer-controller
+      operationId: getBeerById
+      parameters:
+      - name: beerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/BeerDTO'
+    put:
+      tags:
+      - beer-controller
+      operationId: updateBeerById
+      parameters:
+      - name: beerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+    delete:
+      tags:
+      - beer-controller
+      operationId: deleteBeer
+      parameters:
+      - name: beerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+    patch:
+      tags:
+      - beer-controller
+      operationId: patchBeerById
+      parameters:
+      - name: beerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /api/v1/customer:
+    get:
+      tags:
+      - customer-controller
+      operationId: getAllCustomers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerDTO'
+    post:
+      tags:
+      - customer-controller
+      operationId: newCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+  /api/v1/beer:
+    get:
+      tags:
+      - beer-controller
+      operationId: listBeers
+      parameters:
+      - name: beerName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: beerStyle
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+      - name: showInventory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PageBeerDTO'
+    post:
+      tags:
+      - beer-controller
+      operationId: handlePost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+components:
+  schemas:
+    AbstractJsonSchemaPropertyObject:
+      type: object
+      properties:
+        title:
+          type: string
+        readOnly:
+          type: boolean
+    Item:
+      type: object
+      properties:
+        type:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+    JsonSchema:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+        definitions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Item'
+        type:
+          type: string
+        $schema:
+          type: string
+    Links:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Link'
+    RepresentationModelObject:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelBeerOrder:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        customerRef:
+          type: string
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+    PagedModelEntityModelBeerOrder:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            beerOrders:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelBeerOrder'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelObject:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            objects:
+              type: array
+              items:
+                type: object
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: integer
+          format: int32
+        email:
+          type: string
+        createdTime:
+          type: string
+          format: date-time
+        lastModifiedTime:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelBeer:
+      required:
+      - beerName
+      - beerStyle
+      - price
+      - upc
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+        beerName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        beerStyle:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+        upc:
+          type: string
+        quantityOnHand:
+          type: integer
+          format: int32
+        price:
+          type: number
+        createdDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelBeer:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            beers:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelBeer'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelCategory:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            categories:
+              type: array
+              items:
+                $ref: '#/components/schemas/CategoryResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelCategory:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelCategory:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            categories:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelCategory'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelBeer:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            beers:
+              type: array
+              items:
+                $ref: '#/components/schemas/BeerResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelCustomer:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            customers:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelCustomer'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelBeerOrder:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            beerOrders:
+              type: array
+              items:
+                $ref: '#/components/schemas/BeerOrderResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    BeerRequestBody:
+      required:
+      - beerName
+      - beerStyle
+      - price
+      - upc
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          format: int32
+        beerName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        beerStyle:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+        upc:
+          type: string
+        quantityOnHand:
+          type: integer
+          format: int32
+        beerOrderLines:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+        createdDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+    BeerOrderRequestBody:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        customerRef:
+          type: string
+        customer:
+          type: string
+        beerOrderLines:
+          type: array
+          items:
+            type: string
+        beerOrderShipment:
+          type: string
+        new:
+          type: boolean
+    CategoryRequestBody:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        beers:
+          type: array
+          items:
+            type: string
+    CustomerRequestBody:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        version:
+          type: integer
+          format: int32
+        email:
+          type: string
+        createdTime:
+          type: string
+          format: date-time
+        lastModifiedTime:
+          type: string
+          format: date-time
+        beerOrders:
+          type: array
+          items:
+            type: string
+    BeerResponse:
+      required:
+      - beerName
+      - beerStyle
+      - price
+      - upc
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+        beerName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        beerStyle:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+        upc:
+          type: string
+        quantityOnHand:
+          type: integer
+          format: int32
+        price:
+          type: number
+        createdDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+    BeerOrderResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        customerRef:
+          type: string
+        new:
+          type: boolean
+    CategoryResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+    CustomerDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        version:
+          type: integer
+          format: int32
+        createdTime:
+          type: string
+          format: date-time
+        lastModifiedTime:
+          type: string
+          format: date-time
+    BeerDTO:
+      required:
+      - beerName
+      - beerStyle
+      - price
+      - upc
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          format: int32
+        beerName:
+          type: string
+        beerStyle:
+          type: string
+          enum:
+          - LAGER
+          - PILSNER
+          - STOUT
+          - GOSE
+          - PORTER
+          - ALE
+          - WHEAT
+          - IPA
+          - PALE_ALE
+          - SAISON
+        upc:
+          type: string
+        quantityOnHand:
+          type: integer
+          format: int32
+        price:
+          type: number
+        createdDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+    PageBeerDTO:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeerDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        pageSize:
+          type: integer
+          format: int32
+        pageNumber:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    SortObject:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        hreflang:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+        templated:
+          type: boolean
